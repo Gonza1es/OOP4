@@ -13,19 +13,19 @@ public class ApplicationController {
 
     @PostMapping("/determinant")
     public String getCalculateDeterminant(@RequestBody String matrix) {
-        Matrix mtrx = new Matrix(matrix, utils);
+        MatrixUtils mtrx = MatrixFactory.getMatrix(matrix, utils);
         return mtrx.getCalculateDeterminant();
     }
 
     @PostMapping("/transpose")
     public String getTransposeMatrix(@RequestBody String matrix) {
-        Matrix mtrx = new Matrix(matrix, utils);
+        MatrixUtils mtrx = MatrixFactory.getMatrix(matrix, utils);
         return mtrx.getTransposeMatrix();
     }
 
     @PostMapping("/rank")
     public String getRankMatrix(@RequestBody String matrix) {
-        Matrix mtrx = new Matrix(matrix, utils);
+        MatrixUtils mtrx = MatrixFactory.getMatrix(matrix, utils);
         return mtrx.getRankString();
     }
 }

@@ -40,9 +40,9 @@ public class TRationalUtils implements CompositeNumberUtils{
 
     @Override
     public CompositeNumber[][] editValues(String[][] matrix) {
-        TRational[][] newMatrix = new TRational[matrix.length][matrix.length];
+        TRational[][] newMatrix = new TRational[matrix.length][matrix[0].length];
         for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix.length; j++) {
+            for (int j = 0; j < matrix[0].length; j++) {
                 while(true) {
                     try {
                         newMatrix[i][j] = new TRational(matrix[i][j]);
