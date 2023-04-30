@@ -1,18 +1,18 @@
 package com.example.oop4;
 
-public interface CompositeNumberUtils {
+public interface CompositeNumberUtils<T extends CompositeNumber> {
 
-    CompositeNumber sum(CompositeNumber first, CompositeNumber second);
+    T sum(T first, T second);
 
-    CompositeNumber subtract(CompositeNumber first, CompositeNumber second);
+    T subtract(T first, T second);
 
-    CompositeNumber multiply(CompositeNumber first, CompositeNumber second);
+    T multiply(T first, T second);
 
-    CompositeNumber multiplyByNumber(int first, CompositeNumber second);
+    T multiplyByNumber(int first, T second);
 
-    CompositeNumber division(CompositeNumber first, CompositeNumber second);
+    T division(T first, T second);
 
-    double abs(CompositeNumber number);
+    double abs(T number);
 
-    CompositeNumber[][] editValues(String[][] matrix);
+    T[][] editValues(String[][] matrix);
 }

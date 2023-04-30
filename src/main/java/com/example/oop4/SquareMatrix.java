@@ -1,12 +1,12 @@
 package com.example.oop4;
 
-public class SquareMatrix extends Matrix{
+public class SquareMatrix<T extends CompositeNumber> extends Matrix<T>{
 
-    public SquareMatrix(CompositeNumber[][] matrix, CompositeNumberUtils compositeNumberUtils) {
+    public SquareMatrix(T[][] matrix, CompositeNumberUtils<T> compositeNumberUtils) {
         super(matrix, compositeNumberUtils);
     }
 
-    public SquareMatrix(String input, CompositeNumberUtils compositeNumberUtils) {
+    public SquareMatrix(String input, CompositeNumberUtils<T> compositeNumberUtils) {
         super(input, compositeNumberUtils);
     }
 
@@ -15,8 +15,8 @@ public class SquareMatrix extends Matrix{
         return "Определитель матрицы = " + calculateDeterminant(matrix);
     }
 
-    private CompositeNumber calculateDeterminant(CompositeNumber[][] matrix) {
-        CompositeNumber calcResult = new TRational(0, 1);
+    private CompositeNumber calculateDeterminant(T[][] matrix) {
+        T calcResult = (T) CompositeNumber.getDefaultValue(matrix[0][0]);
         if (matrix.length == 2) {
             calcResult = compositeNumberUtils.subtract(compositeNumberUtils.multiply(matrix[0][0], matrix[1][1]), compositeNumberUtils.multiply(matrix[1][0], matrix[0][1]));
         } else {
@@ -27,15 +27,15 @@ public class SquareMatrix extends Matrix{
                 } else {
                     koeff = 1;
                 }
-                calcResult = compositeNumberUtils.sum(calcResult, compositeNumberUtils.multiply(compositeNumberUtils.multiplyByNumber(koeff,matrix[0][i]), calculateDeterminant(getMinor(matrix, 0, i))));
+                calcResult = compositeNumberUtils.sum(calcResult, compositeNumberUtils.multiply(compositeNumberUtils.multiplyByNumber(koeff,matrix[0][i]), (T) calculateDeterminant(getMinor(matrix, 0, i))));
             }
         }
         return calcResult;
     }
 
-    private CompositeNumber[][] getMinor(CompositeNumber[][] matrix, int row, int column) {
+    private T[][] getMinor(CompositeNumber[][] matrix, int row, int column) {
         int minorLength = matrix.length - 1;
-        CompositeNumber[][] minor = new CompositeNumber[minorLength][minorLength];
+        T[][] minor = (T[][]) new CompositeNumber[minorLength][minorLength];
         int dI = 0;
         int dJ = 0;
         for (int i = 0; i <= minorLength; i++) {
@@ -47,7 +47,7 @@ public class SquareMatrix extends Matrix{
                     if (j == column) {
                         dJ = 1;
                     } else {
-                        minor[i - dI][j - dJ] = matrix[i][j];
+                        minor[i - dI][j - dJ] = (T) matrix[i][j];
                     }
                 }
             }

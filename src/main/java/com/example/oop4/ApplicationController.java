@@ -1,31 +1,29 @@
 package com.example.oop4;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
 public class ApplicationController {
 
-    private final TRationalUtils utils = new TRationalUtils();
-
     @PostMapping("/determinant")
-    public String getCalculateDeterminant(@RequestBody String matrix) {
-        MatrixUtils mtrx = MatrixFactory.getMatrix(matrix, utils);
+    public String getCalculateDeterminant(@RequestBody String matrix,
+                                          @RequestParam String type) {
+        MatrixUtils mtrx = MatrixFactory.getMatrix(matrix, type);
         return mtrx.getCalculateDeterminant();
     }
 
     @PostMapping("/transpose")
-    public String getTransposeMatrix(@RequestBody String matrix) {
-        MatrixUtils mtrx = MatrixFactory.getMatrix(matrix, utils);
+    public String getTransposeMatrix(@RequestBody String matrix,
+                                     @RequestParam String type) {
+        MatrixUtils mtrx = MatrixFactory.getMatrix(matrix, type);
         return mtrx.getTransposeMatrix();
     }
 
     @PostMapping("/rank")
-    public String getRankMatrix(@RequestBody String matrix) {
-        MatrixUtils mtrx = MatrixFactory.getMatrix(matrix, utils);
+    public String getRankMatrix(@RequestBody String matrix,
+                                @RequestParam String type) {
+        MatrixUtils mtrx = MatrixFactory.getMatrix(matrix, type);
         return mtrx.getRankString();
     }
 }

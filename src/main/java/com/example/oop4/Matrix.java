@@ -4,23 +4,23 @@ package com.example.oop4;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Matrix implements MatrixUtils{
+public class Matrix<T extends CompositeNumber> implements MatrixUtils{
 
-    protected CompositeNumber[][] matrix;
+    protected T[][] matrix;
 
-    protected final CompositeNumberUtils compositeNumberUtils;
+    protected final CompositeNumberUtils<T> compositeNumberUtils;
 
     private Integer rows;
     private Integer columns;
 
-    public Matrix(CompositeNumber[][] matrix, CompositeNumberUtils compositeNumberUtils) {
+    public Matrix(T[][] matrix, CompositeNumberUtils<T> compositeNumberUtils) {
         this.compositeNumberUtils = compositeNumberUtils;
         this.rows = matrix.length;
         this.columns = matrix[0].length;
         this.matrix = matrix;
     }
 
-    public Matrix(String input, CompositeNumberUtils compositeNumberUtils) {
+    public Matrix(String input, CompositeNumberUtils<T> compositeNumberUtils) {
         this.compositeNumberUtils = compositeNumberUtils;
         String[] rows = input.split("\n");
         int columnCount = rows[0].split(" ").length;
@@ -38,10 +38,10 @@ public class Matrix implements MatrixUtils{
 
     @Override
     public String getTransposeMatrix(){
-        CompositeNumber[][] transpose = new CompositeNumber[columns][rows];
+        String[][] transpose = new String[columns][rows];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                transpose[j][i] = matrix[i][j];
+                transpose[j][i] = matrix[i][j].toString();
             }
         }
         return toString(transpose);
@@ -64,7 +64,7 @@ public class Matrix implements MatrixUtils{
     @Override
     public String getRankString(){
         double EPS = 1E-9;
-        CompositeNumber[][] currentMatrix = new CompositeNumber[matrix.length][matrix.length];
+        T[][] currentMatrix = (T[][]) new CompositeNumber[matrix.length][matrix.length];
 
         for (int i = 0; i < matrix.length; i++) {
             System.arraycopy(matrix[i], 0, currentMatrix[i], 0, matrix.length);
@@ -96,15 +96,15 @@ public class Matrix implements MatrixUtils{
 
     @Override
     public String getMatrix() {
-        return toString(this.matrix);
+        return null;
     }
 
     @Override
-    public String toString(CompositeNumber[][] matrix) {
+    public String toString(String[][] matrix) {
         StringBuilder string = new StringBuilder();
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
-                string.append(matrix[i][j].toString()).append(" ");
+                string.append(matrix[i][j]).append(" ");
             }
             string.append("\n");
         }

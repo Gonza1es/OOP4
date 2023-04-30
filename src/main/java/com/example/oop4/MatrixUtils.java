@@ -10,6 +10,6 @@ public interface MatrixUtils {
 
     String getMatrix();
 
-    String toString(CompositeNumber[][] matrix);
+    String toString(String[][] matrix);
     String getCalculateDeterminant();
 }
